@@ -14,11 +14,11 @@ function pickPlayersChoice() {
 }
 
 function game(compChoice, playersChoice) {
-     if (compChoice === "paper" && playersChoice === "rock")  || 
+     if ((compChoice === "paper" && playersChoice === "rock") || 
         (compChoice === "rock"  && playersChoice === "scissor") ||
-        (compChoice === "scissor" && playersChoice === "paper") {
+        (compChoice === "scissor" && playersChoice === "paper")) {
           computerwins++;
-        } else of !(compChoice === playersChoice) {
+        } else if (compChoice !== playersChoice) {
           humanwins++;
         }
 }
