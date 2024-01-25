@@ -1,12 +1,47 @@
 
-const rockPaperScissors = Array("Rock", "Paper", "Scissor");
+const rockPaperScissors = Array("rock", "paper", "scissor");
+let humanwins = 0;
+let computerwins = 0;
 
-function pickCompChoice(){
-     pickOneItem = rockPaperScissors[Math.floor(Math.random()*3)];
+function pickCompChoice() {
+     return rockPaperScissors[Math.floor(Math.random() * 3)];
 
-     return pickOneItem;
 }
 
-compChoice = pickCompChoice();
+function pickPlayersChoice() {
 
-console.log(compChoice);
+     return prompt("What is it gonna be! Rock, Paper or.... Scissor").toLowerCase();
+}
+
+function game(compChoice, playersChoice) {
+     if (compChoice === "paper" && playersChoice === "rock") {
+          computerwins++;
+     } else if (compChoice === "paper" && playersChoice === "scissor") {
+          humanwins++;
+
+     } else if (compChoice === "rock" && playersChoice === "paper") {
+          humanwins++;
+     } else if (compChoice === "rock" && playersChoice === "scissor") {
+          computerwins++;
+     } else if (compChoice === "scissor" && playersChoice === "paper")  {
+          computerwins++;
+     } else if (compChoice === "scissor" && playersChoice === "rock")  {
+          humanwins++;
+     }
+}
+
+for (i = 1;i<= 5; i++) {
+     compChoice = pickCompChoice();
+     playersChoice = pickPlayersChoice();
+     game(compChoice, playersChoice)
+}
+
+if (computerwins > humanwins) {
+     console.log(`Computer wins! with ${computerwins} out of 5`)
+} else if (computerwins < humanwins) {
+     console.log(`Human wins! with ${humanwins} out of 5`)
+} else {
+     console.log("Its a TIE!")
+}
+
+
