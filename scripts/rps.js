@@ -14,20 +14,13 @@ function pickPlayersChoice() {
 }
 
 function game(compChoice, playersChoice) {
-     if (compChoice === "paper" && playersChoice === "rock") {
+     if (compChoice === "paper" && playersChoice === "rock")  || 
+        (compChoice === "rock"  && playersChoice === "scissor") ||
+        (compChoice === "scissor" && playersChoice === "paper") {
           computerwins++;
-     } else if (compChoice === "paper" && playersChoice === "scissor") {
+        } else of !(compChoice === playersChoice) {
           humanwins++;
-
-     } else if (compChoice === "rock" && playersChoice === "paper") {
-          humanwins++;
-     } else if (compChoice === "rock" && playersChoice === "scissor") {
-          computerwins++;
-     } else if (compChoice === "scissor" && playersChoice === "paper")  {
-          computerwins++;
-     } else if (compChoice === "scissor" && playersChoice === "rock")  {
-          humanwins++;
-     }
+        }
 }
 
 for (i = 1;i<= 5; i++) {
