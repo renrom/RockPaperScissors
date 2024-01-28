@@ -1,45 +1,78 @@
-
 const rockPaperScissors = Array("rock", "paper", "scissor");
+
 let humanwins = 0;
 let computerwins = 0;
+let buttonRock = document.querySelector("#btnRock");
+let buttonPaper = document.querySelector("#btnPaper");
+let buttonScissor = document.querySelector("#btnScissor");
+let divresult = document.querySelector(".result");
+
+
+buttonRock.addEventListener("click", function () {
+     game(pickCompChoice(), "rock");
+     resetCounter();
+});
+
+buttonPaper.addEventListener("click", function () {
+     game(pickCompChoice(), "paper");
+     resetCounter();
+});
+
+buttonScissor.addEventListener("click", function () {
+     game(pickCompChoice(), "scissor");
+     resetCounter();
+});
 
 function pickCompChoice() {
      return rockPaperScissors[Math.floor(Math.random() * 3)];
 }
 
-function pickPlayersChoice() {
+function resetCounter() {
 
-     return prompt("What is it gonna be! Rock, Paper or.... Scissor").toLowerCase();
+     if (computerwins === 5 || humanwins === 5) {
+          computerwins = 0;
+          humanwins = 0;
+     }
+}
+
+function displayResult(whoWon, computerwins, humanwins) {
+
+     if (computerwins === 5 || humanwins === 5) {
+          if (computerwins === 5) {
+               winner = "computer"
+          } else {
+               winner = "human"
+          }
+          let displayText = "We have a winner! " + winner + " Wins the game!"
+          divresult.textContent = displayText;
+          return;
+     }
+     if (whoWon !== "TIE") {
+
+
+          let displayText = "This round " + whoWon + " won! "
+               + "Computer has: " + computerwins + " Humans has: " + humanwins;
+          divresult.textContent = displayText;
+     } else {
+          let displayResult = "This round is a TIE " + "Computer has: "
+               + computerwins + " Humans has: " + humanwins;
+     }
+
 }
 
 function game(compChoice, playersChoice) {
-     if ((compChoice === "paper" && playersChoice === "rock") || 
-        (compChoice === "rock"  && playersChoice === "scissor") ||
-        (compChoice === "scissor" && playersChoice === "paper")) {
-          console.log("Computer wins this round!")
+     if ((compChoice === "paper" && playersChoice === "rock") ||
+          (compChoice === "rock" && playersChoice === "scissor") ||
+          (compChoice === "scissor" && playersChoice === "paper")) {
           computerwins++;
-        } else if (compChoice !== playersChoice) {
+          displayResult("computer", computerwins, humanwins);
+     } else if (compChoice !== playersChoice) {
           humanwins++;
-          console.log("Human wins this round!")
-        } else {
-          console.log(`This round is a TIE!`)
-        }
-}
+          displayResult("Human", computerwins, humanwins);
+     } else {
+          displayResult("TIE!", computerwins, humanwins);
 
-for (i = 1;i<= 5; i++) {
-     compChoice = pickCompChoice();
-     console.log(`Computer picks: ${compChoice}`)
-     playersChoice = pickPlayersChoice();
-     console.log(`Player Choose: ${playersChoice}`)
-     game(compChoice, playersChoice)
-}
-
-if (computerwins > humanwins) {
-     console.log(`Computer wins! with ${computerwins} out of 5`)
-} else if (computerwins < humanwins) {
-     console.log(`Human wins! with ${humanwins} out of 5`)
-} else {
-     console.log("Its a TIE!")
+     }
 }
 
 
